@@ -2,8 +2,7 @@ import os
 import subprocess
 from datetime import datetime
 
-def create_backup(db_name, user, password, backup_dir):
-    os.environ['PGPASSWORD'] = password
+def create_backup(db_name, user, backup_dir):
 
     timestamp = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
     backup_file = os.path.join(backup_dir, f"{db_name}_backup_{timestamp}.sql")
@@ -14,4 +13,4 @@ def create_backup(db_name, user, password, backup_dir):
     print(f"Backup of database {db_name} created at {backup_file}")
 
 if __name__ == "__main__":
-    create_backup('auth_db', 'dima', 'dima777', '/home/dima/pract_RAIS')
+    create_backup('auth_db', 'postgres', '/home/dima/pract_RAIS')
