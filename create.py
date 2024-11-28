@@ -14,4 +14,4 @@ def create_backup(db_name, user, password, backup_dir):
     print(f"Backup of database {db_name} created at {backup_file}")
 
 if __name__ == "__main__":
-    create_backup('auth_db', 'postgres', 'dima777', 'pract_RAIS')
+    create_backup('auth_db', 'postgres', 'dima777', '/home/dima/pract_RAIS')
