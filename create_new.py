@@ -10,7 +10,7 @@ def create_backup_ssh(db_name, user, remote_host, backup_dir, ssh_user, ssh_pass
     backup_file = f"/var/lib/postgresql/dumps/{db_name}_backup_{timestamp}.dump"  # Создаем дамп в /tmp на удаленном сервере
 
     # Строим команду для выполнения через SSH
-    dump_command = f"pg_dump -U postgres -h localhost -F c -b -v -f {backup_file} {db_name}"
+    dump_command = f"pg_dump -U postgres -h {remote_host} -F c -b -v -f {backup_file} {db_name}"
 
     try:
         # Выполняем команду через SSH
