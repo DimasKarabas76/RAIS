@@ -22,7 +22,7 @@ def create_backup_ssh(db_name, user, remote_host, backup_dir, ssh_user, ssh_pass
 
         # Выполняем команду на удаленной машине
     ssh.exec_command(dump_command)
-    time.sleep(5)
+    time.sleep(15)
 
 
         # Скачиваем файл на локальный сервер, если нужно
