@@ -22,8 +22,6 @@ def create_backup_ssh(db_name, user, remote_host, backup_dir, ssh_user, ssh_pass
         # Выполняем команду на удаленной машине
         stdin, stdout, stderr = ssh.exec_command(dump_command)
 
-        # Ожидаем завершения команды
-        stdout.channel.recv_exit_status()
 
         # Печатаем вывод для отладки
         print(stdout.read().decode())
