@@ -8,7 +8,7 @@ def create_backup_ssh(db_name, user, remote_host, backup_dir, ssh_user, ssh_pass
     timestamp = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
 
     # Строим команду для выполнения через SSH
-    dump_command = f"pg_dump -U {user} -h localhost -F c -b -v {db_name} > {backup_file}"
+    dump_command = f"pg_dump -U {user} -h localhost -F c -b -v {db_name} > {backup_dir}"
 
     try:
         # Создаем SSH клиент
