@@ -50,7 +50,7 @@ def run_periodically(interval, db_name, user, remote_host, backup_dir, ssh_user,
         time.sleep(interval)
 
 
-if name == "__main__":
+if __name__ == "__main__":
     # Параметры для подключения и бэкапа
     db_name = 'auth_db'
     user = 'dima'
