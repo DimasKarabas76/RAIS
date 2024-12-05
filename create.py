@@ -20,11 +20,8 @@ def create_backup_ssh(db_name, user, remote_host, backup_dir, ssh_user, ssh_pass
 
         sftp = ssh.open_sftp()
         local_backup_path = os.path.join(backup_dir, f"{db_name}_backup_{timestamp}.dump")
-        sftp.get(backup_file, local_backup_path)
+        sftp.get(local_backup_path)
         print(f"Backup file downloaded to: {local_backup_path}")
-
-        # Удаляем файл на удаленном сервере
-        sftp.remove(backup_file)
 
         # Закрываем соединения
         sftp.close()
