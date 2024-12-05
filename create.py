@@ -11,36 +11,28 @@ def create_backup_ssh(db_name, user, remote_host, backup_dir, ssh_user, ssh_pass
     # Строим команду для выполнения через SSH
     dump_command = f"pg_dump -U {user} -h localhost -F c -b -v {db_name} > {backup_file}"
 
-    try:
+
         # Создаем SSH клиент
-        ssh = paramiko.SSHClient()
-        ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+    ssh = paramiko.SSHClient()
+    ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 
         # Подключаемся по паролю
-        ssh.connect(remote_host, username=ssh_user, password=ssh_password)
+    ssh.connect(remote_host, username=ssh_user, password=ssh_password)
 
         # Выполняем команду на удаленной машине
-        stdin, stdout, stderr = ssh.exec_command(dump_command)
+    ssh.exec_command(dump_command)
 
-
-        # Печатаем вывод для отладки
-        print(stdout.read().decode())
-        error = stderr.read().decode()
-        if error:
-            print(f"Error: {error}")
 
         # Скачиваем файл на локальный сервер, если нужно
-        sftp = ssh.open_sftp()
-        local_backup_path = os.path.join(backup_dir, f"{db_name}_backup_{timestamp}.dump")
-        sftp.get(backup_file, local_backup_path)
-        print(f"Backup file downloaded to: {local_backup_path}")
+    sftp = ssh.open_sftp()
+    local_backup_path = os.path.join(backup_dir, f"{db_name}_backup_{timestamp}.dump")
+    sftp.get(backup_file, local_backup_path)
+    print(f"Backup file downloaded to: {local_backup_path}")
 
         # Закрываем соединения
-        sftp.close()
-        ssh.close()
+    sftp.close()
+    ssh.close()
 
-    except Exception as e:
-        print(f"SSH connection failed: {e}")
 
 def run_periodically(interval, db_name, user, remote_host, backup_dir, ssh_user, ssh_password):
     while True:
