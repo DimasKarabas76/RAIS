@@ -14,7 +14,7 @@ def create_backup_ssh(db_name, user, remote_host, backup_dir, ssh_user, ssh_pass
 
     try:
         # Выполняем команду через SSH
-        ssh_command = f"ssh {ssh_user}@{remote_host} '{dump_command}'"
+        ssh_command = f"sshpass -p {ssh_password} ssh {ssh_user}@{remote_host} '{dump_command}'"
 
         # Выполнение команды
         process = subprocess.Popen(ssh_command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -28,7 +28,7 @@ def create_backup_ssh(db_name, user, remote_host, backup_dir, ssh_user, ssh_pass
 
         # Скачиваем файл на локальный сервер
         local_backup_path = os.path.join(backup_dir, f"{db_name}_backup_{timestamp}.dump")
-        scp_command = f"scp {ssh_user}@{remote_host}:{backup_file} {local_backup_path}"
+        scp_command = f"sshpass -p {ssh_password} scp {ssh_user}@{remote_host}:{backup_file} {local_backup_path}"
 
         # Выполняем команду scp для скачивания
         process = subprocess.Popen(scp_command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
