@@ -52,7 +52,7 @@ def run_periodically(interval, db_name, user, remote_host, backup_dir, ssh_user,
         create_backup_ssh(db_name, user, remote_host, backup_dir, ssh_user, ssh_password)
         time.sleep(interval)
 
-if name == "__main__":
+if __name__ == "__main__":
     db_name = 'auth_db'
     user = 'dima'
     remote_host = '172.25.204.9'
