@@ -17,7 +17,7 @@ def create_backup_ssh(db_name, user, remote_host, backup_dir, ssh_user, ssh_pass
     ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 
         # Подключаемся по паролю
-    ssh.connect(remote_host=remote_host, username=ssh_user, password=ssh_password)
+    ssh.connect(remote_host, username=ssh_user, password=ssh_password)
     time.sleep(5)
 
         # Выполняем команду на удаленной машине
