@@ -17,10 +17,12 @@ def create_backup_ssh(db_name, user, remote_host, backup_dir, ssh_user, ssh_pass
     ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 
         # Подключаемся по паролю
-    ssh.connect(remote_host, username=ssh_user, password=ssh_password)
+    ssh.connect(remote_host=remote_host, username=ssh_user, password=ssh_password)
+    time.sleep(5)
 
         # Выполняем команду на удаленной машине
     ssh.exec_command(dump_command)
+    time.sleep(5)
 
 
         # Скачиваем файл на локальный сервер, если нужно
@@ -49,4 +51,4 @@ if __name__ == "__main__":
     ssh_password = '123'  # Пароль для SSH подключения
 
     # Запуск бэкапов каждые 10 минут (600 секунд)
-    run_periodically(30, db_name, user, remote_host, backup_dir, ssh_user, ssh_password)
+    run_periodically(10, db_name, user, remote_host, backup_dir, ssh_user, ssh_password)
